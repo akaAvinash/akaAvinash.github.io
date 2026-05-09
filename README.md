@@ -62,14 +62,6 @@ portfolio/
     └── favicon.svg
 ```
 
----
-
-## deploying
-
-Push to `main`, go to repo Settings → Pages, set source to `main / root`. That's it. Builds in ~30 seconds, live at `https://akaAvinash.github.io/portfolio`.
-
----
-
 ## contact
 
 - [linkedin.com/in/avinashkumarks](https://linkedin.com/in/avinashkumarks)
