@@ -64,6 +64,10 @@
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* Subtle cyan halo — text-shadow draws around the gradient-clipped glyphs */
+  text-shadow:
+    0 0 24px rgba(0, 212, 255, 0.18),
+    0 0 60px rgba(0, 212, 255, 0.10);
   margin-bottom: var(--sp-4);
 }
 
