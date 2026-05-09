@@ -71,28 +71,115 @@
       </div>
       <canvas id="particles" class="particles" aria-hidden="true"></canvas>
       <div class="hero__inner">
-        <p class="hero__greeting">$ whoami</p>
+        <p class="hero__greeting">Hi, I&rsquo;m</p>
         <h1 class="hero__name">Avinash Kumar K S</h1>
         <p class="hero__role">
-          <span class="hero__prompt">&gt;</span>
-          <span id="typewriter" class="hero__typewriter" aria-live="polite"></span>
-          <span class="hero__cursor" aria-hidden="true">_</span>
+          <span
+            id="typewriter"
+            class="hero__typewriter"
+            aria-live="polite"
+            data-roles='["QA Engineer @ Amazon","SDET | 5+ Years","Python Automation Engineer","AI-Powered Test Architect","Playwright | Selenium | Pytest"]'
+          ></span>
+          <span class="hero__cursor" aria-hidden="true"></span>
+        </p>
+        <p class="status-pill" role="status">
+          <span class="status-pill__dot" aria-hidden="true"></span>
+          <span>Open to opportunities</span>
         </p>
         <div class="hero__cta">
-          <a href="#projects" class="btn btn--primary">View Projects</a>
-          <a href="#contact" class="btn btn--ghost">Get in Touch</a>
+          <a href="#projects" class="btn btn--primary">
+            <i data-lucide="folder-git-2"></i>
+            <span>View Projects</span>
+          </a>
+          <a href="assets/resume.pdf" class="btn btn--outline" download>
+            <i data-lucide="download"></i>
+            <span>Download Resume</span>
+          </a>
         </div>
+        <ul class="hero__socials" aria-label="Social links">
+          <li>
+            <a href="https://github.com/akaAvinash" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <i data-lucide="github"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com/in/avinashkumarks" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <i data-lucide="linkedin"></i>
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- TODO: D1-T6 — About bio + layout -->
     <section id="about" class="section">
       <div class="section__inner">
-        <h2 class="section__title"><span class="section__num">01.</span> About</h2>
-        <div class="about__content">
-          <p class="about__lead">
-            <!-- bio populated in D1-T6 -->
-          </p>
+        <p class="about__label"><span class="about__label-hash">#</span> about_me.txt</p>
+        <h2 class="section-title"><span class="section-title__num">01.</span> About</h2>
+
+        <div class="about__grid">
+          <div class="about__col about__col--text">
+            <p class="about__lead">
+              I build test systems that don&rsquo;t just catch bugs &mdash; they
+              <span class="about__accent">think</span>. 5+ years at Amazon Development
+              Center, Chennai, leading QA for high-scale services. I&rsquo;ve shipped
+              AI-powered test analyzers, self-healing automation frameworks, and tools
+              that make quality engineering measurably smarter.
+            </p>
+
+            <ul class="stats">
+              <li class="stat-card">
+                <span class="stat-card__num">5+</span>
+                <span class="stat-card__label">Years Experience</span>
+              </li>
+              <li class="stat-card">
+                <span class="stat-card__num">Amazon</span>
+                <span class="stat-card__label">Dev Center, Chennai</span>
+              </li>
+              <li class="stat-card">
+                <span class="stat-card__num">10</span>
+                <span class="stat-card__label">Member QA Team Lead</span>
+              </li>
+              <li class="stat-card">
+                <span class="stat-card__num">2</span>
+                <span class="stat-card__label">AI Tools Shipped</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="about__col about__col--terminal">
+            <div class="terminal glass-card" role="img" aria-label="Terminal showing whoami, role, and location">
+              <div class="terminal__titlebar">
+                <span class="terminal__dot terminal__dot--red"></span>
+                <span class="terminal__dot terminal__dot--yellow"></span>
+                <span class="terminal__dot terminal__dot--green"></span>
+                <span class="terminal__title">~/avinash &mdash; zsh</span>
+              </div>
+              <div class="terminal__body">
+                <p class="terminal__line">
+                  <span class="terminal__prompt">$</span>
+                  <span class="terminal__cmd">whoami</span>
+                </p>
+                <p class="terminal__line terminal__line--out">Avinash Kumar K S</p>
+
+                <p class="terminal__line">
+                  <span class="terminal__prompt">$</span>
+                  <span class="terminal__cmd">cat role.txt</span>
+                </p>
+                <p class="terminal__line terminal__line--out">SDET | QA Lead | AI Test Architect</p>
+
+                <p class="terminal__line">
+                  <span class="terminal__prompt">$</span>
+                  <span class="terminal__cmd">echo $location</span>
+                </p>
+                <p class="terminal__line terminal__line--out">Chennai, India</p>
+
+                <p class="terminal__line">
+                  <span class="terminal__prompt">$</span>
+                  <span class="terminal__caret" aria-hidden="true"></span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
