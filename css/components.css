@@ -1,1 +1,292 @@
-/* components.css — cards, badges, timeline, nav. */
+/* components.css — nav, hero background, cards, badges, timeline */
+
+/* ============================================================
+   Hero background — dot grid + drifting blurred blobs + canvas
+   ============================================================ */
+
+/* Dot-grid overlay sits on the hero itself (cheapest paint) */
+.section--hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(0, 212, 255, 0.10) 1px, transparent 1.5px);
+  background-size: 28px 28px;
+  background-position: 0 0;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 55%, transparent 90%);
+          mask-image: radial-gradient(ellipse at center, black 55%, transparent 90%);
+  opacity: 0.7;
+}
+
+/* Vignette fade at the bottom so hero blends into the next section */
+.section--hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 30%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, var(--bg-primary));
+}
+
+/* Blob layer wrapper — keeps blobs behind the dot grid */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero__blob {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.4;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.hero__blob--cyan {
+  top: -10%;
+  left: -8%;
+  background: radial-gradient(circle at 35% 35%, var(--accent-cyan), transparent 65%);
+  animation: heroBlobDriftA 18s var(--ease-in-out) infinite alternate;
+}
+
+.hero__blob--blue {
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(circle at 60% 60%, var(--accent-blue), transparent 65%);
+  animation: heroBlobDriftB 22s var(--ease-in-out) infinite alternate;
+}
+
+@media (max-width: 640px) {
+  .hero__blob {
+    width: 320px;
+    height: 320px;
+    filter: blur(80px);
+  }
+}
+
+/* Particle canvas sits above blobs / dot grid, below content */
+.particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+
+
+/* ============================================================
+   Site Header — fixed wrapper for the nav
+   ============================================================ */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    backdrop-filter var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* Scrolled state — added by main.js after 50px */
+.site-header.is-scrolled {
+  background-color: rgba(10, 10, 15, 0.72);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom-color: var(--border-subtle);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* ============================================================
+   Nav layout
+   ============================================================ */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  height: var(--nav-height);
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--sp-5);
+}
+
+@media (min-width: 768px) {
+  .nav { padding-inline: var(--sp-6); }
+}
+
+/* ---------- Logo ---------- */
+.nav__logo {
+  font-family: var(--font-mono);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+  color: var(--accent-cyan);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: text-shadow var(--dur-fast) var(--ease-out);
+}
+
+.nav__logo:hover {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 14px rgba(0, 212, 255, 0.55);
+}
+
+.nav__logo-bracket {
+  color: var(--text-muted);
+  font-weight: var(--fw-regular);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__logo:hover .nav__logo-bracket {
+  color: var(--accent-cyan);
+}
+
+/* ---------- Links (desktop) ---------- */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+}
+
+.nav__link {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  padding: var(--sp-2) var(--sp-1);
+  letter-spacing: 0.02em;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 2px;
+  background: var(--accent-cyan);
+  border-radius: var(--r-pill);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.nav__link:hover,
+.nav__link.is-active {
+  color: var(--accent-cyan);
+}
+
+.nav__link:hover::before,
+.nav__link.is-active::before {
+  transform: scaleX(1);
+}
+
+.nav__link.is-active {
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.45);
+}
+
+/* ---------- Hamburger toggle ---------- */
+.nav__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  color: var(--text-primary);
+  border: 1px solid transparent;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.nav__toggle:hover {
+  background: rgba(0, 212, 255, 0.08);
+  border-color: var(--glass-border);
+  color: var(--accent-cyan);
+}
+
+.nav__toggle-icon {
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.nav__toggle-icon--close { display: none; }
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-icon--open  { display: none; }
+.nav__toggle[aria-expanded="true"] .nav__toggle-icon--close { display: inline-flex; }
+
+/* ============================================================
+   Mobile dropdown menu (≤ 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  .nav__toggle { display: inline-flex; }
+
+  .nav__links {
+    position: absolute;
+    top: var(--nav-height);
+    left: var(--sp-4);
+    right: var(--sp-4);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--sp-3);
+    background: rgba(15, 15, 26, 0.92);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--r-lg);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out),
+      visibility var(--dur-base) var(--ease-out);
+  }
+
+  .nav__links.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav__links li + li {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .nav__link {
+    display: block;
+    padding: var(--sp-3) var(--sp-3);
+    font-size: var(--fs-base);
+  }
+
+  .nav__link::before {
+    left: var(--sp-3);
+    right: auto;
+    width: 18px;
+  }
+}

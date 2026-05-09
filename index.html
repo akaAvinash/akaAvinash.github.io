@@ -46,16 +46,17 @@
       <a href="#hero" class="nav__logo">
         <span class="nav__logo-bracket">&lt;</span>AK<span class="nav__logo-bracket">/&gt;</span>
       </a>
-      <ul class="nav__links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <ul id="nav-menu" class="nav__links">
+        <li><a class="nav__link" href="#about">About</a></li>
+        <li><a class="nav__link" href="#skills">Skills</a></li>
+        <li><a class="nav__link" href="#experience">Experience</a></li>
+        <li><a class="nav__link" href="#projects">Projects</a></li>
+        <li><a class="nav__link" href="#certifications">Certifications</a></li>
+        <li><a class="nav__link" href="#contact">Contact</a></li>
       </ul>
-      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
-        <i data-lucide="menu"></i>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+        <i class="nav__toggle-icon nav__toggle-icon--open" data-lucide="menu"></i>
+        <i class="nav__toggle-icon nav__toggle-icon--close" data-lucide="x"></i>
       </button>
     </nav>
   </header>
@@ -64,6 +65,10 @@
 
     <!-- TODO: D1-T4 / D1-T5 — Hero + typewriter + particle background -->
     <section id="hero" class="section section--hero">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__blob hero__blob--cyan"></div>
+        <div class="hero__blob hero__blob--blue"></div>
+      </div>
       <canvas id="particles" class="particles" aria-hidden="true"></canvas>
       <div class="hero__inner">
         <p class="hero__greeting">$ whoami</p>

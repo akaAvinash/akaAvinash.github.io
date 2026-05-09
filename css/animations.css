@@ -1,1 +1,39 @@
-/* animations.css — keyframes, scroll triggers. */
+/* animations.css — keyframes + scroll-trigger helpers */
+
+/* ---------- Hero blob drift ---------- */
+@keyframes heroBlobDriftA {
+  0%   { transform: translate3d(0, 0, 0)         scale(1);    }
+  50%  { transform: translate3d(40px, 60px, 0)   scale(1.08); }
+  100% { transform: translate3d(80px, 20px, 0)   scale(0.96); }
+}
+
+@keyframes heroBlobDriftB {
+  0%   { transform: translate3d(0, 0, 0)          scale(1);    }
+  50%  { transform: translate3d(-50px, -40px, 0)  scale(1.05); }
+  100% { transform: translate3d(-20px, -80px, 0)  scale(0.94); }
+}
+
+/* ---------- Hero cursor blink (used by typewriter in D1-T4) ---------- */
+@keyframes blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ---------- Scroll-fade in (Intersection Observer hooks) ---------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Reduced motion: kill blob drift ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__blob { animation: none !important; }
+}
