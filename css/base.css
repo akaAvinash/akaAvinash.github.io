@@ -181,6 +181,23 @@ select {
   background: rgba(0, 212, 255, 0.32);
 }
 
+/* ---------- Icon defaults ----------
+   Lucide replaces <i data-lucide="..."> with <svg class="lucide ...">.
+   Inline brand icons (GitHub / LinkedIn) ship as <svg class="icon"> with
+   <use href="#icon-..."/>. This baseline keeps every icon visible at 1em
+   with currentColor; component-specific selectors override on size. */
+i[data-lucide],
+svg.lucide,
+svg.icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  stroke: currentColor;
+  fill: none;
+  flex-shrink: 0;
+}
+
 /* ---------- Typography ---------- */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-body);
@@ -332,6 +349,7 @@ hr {
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   box-shadow: var(--shadow-card);
+  will-change: transform;
   transition:
     border-color var(--dur-base) var(--ease-out),
     transform var(--dur-base) var(--ease-out),

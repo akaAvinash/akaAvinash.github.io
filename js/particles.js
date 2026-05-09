@@ -55,6 +55,7 @@
   }
 
   function step() {
+    if (!running) return;
     ctx.clearRect(0, 0, width, height);
 
     // Update positions

@@ -40,7 +40,23 @@
 </head>
 <body>
 
-  <!-- TODO: D1-T3 — Sticky blur navbar -->
+  <!-- Inline icon symbols. Lucide removed brand icons (github/linkedin) from
+       its main package, so we ship them inline here and reference via <use>. -->
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
+       style="position:absolute;width:0;height:0;overflow:hidden">
+    <defs>
+      <symbol id="icon-github" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 18c-4.51 2-5-2-7-2"/>
+      </symbol>
+      <symbol id="icon-linkedin" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+        <rect fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="4" height="12" x="2" y="9"/>
+        <circle fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" cx="4" cy="4" r="2"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <header class="site-header">
     <nav id="nav" class="nav" aria-label="Primary">
       <a href="#hero" class="nav__logo">
@@ -91,7 +107,7 @@
             <i data-lucide="folder-git-2"></i>
             <span>View Projects</span>
           </a>
-          <a href="assets/resume.pdf" class="btn btn--outline" download>
+          <a href="Avinash.pdf" class="btn btn--outline" download="Avinash-Kumar-KS-Resume.pdf">
             <i data-lucide="download"></i>
             <span>Download Resume</span>
           </a>
@@ -99,12 +115,12 @@
         <ul class="hero__socials" aria-label="Social links">
           <li>
             <a href="https://github.com/akaAvinash" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <i data-lucide="github"></i>
+              <svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg>
             </a>
           </li>
           <li>
             <a href="https://linkedin.com/in/avinashkumarks" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <i data-lucide="linkedin"></i>
+              <svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
             </a>
           </li>
         </ul>
@@ -113,12 +129,12 @@
 
     <section id="about" class="section">
       <div class="section__inner">
-        <p class="about__label"><span class="about__label-hash">#</span> about_me.txt</p>
-        <h2 class="section-title"><span class="section-title__num">01.</span> About</h2>
+        <p class="about__label" data-animate="fade-in"><span class="about__label-hash">#</span> about_me.txt</p>
+        <h2 class="section-title" data-animate="fade-up"><span class="section-title__num">01.</span> About</h2>
 
         <div class="about__grid">
           <div class="about__col about__col--text">
-            <p class="about__lead">
+            <p class="about__lead" data-animate="fade-up">
               I build test systems that don&rsquo;t just catch bugs &mdash; they
               <span class="about__accent">think</span>. 5+ years at Amazon Development
               Center, Chennai, leading QA for high-scale services. I&rsquo;ve shipped
@@ -126,27 +142,27 @@
               that make quality engineering measurably smarter.
             </p>
 
-            <ul class="stats">
-              <li class="stat-card">
-                <span class="stat-card__num">5+</span>
+            <ul class="stats" data-stagger>
+              <li class="stat-card" data-animate="fade-up">
+                <span class="stat-card__num" data-count="5" data-count-suffix="+">5+</span>
                 <span class="stat-card__label">Years Experience</span>
               </li>
-              <li class="stat-card">
+              <li class="stat-card" data-animate="fade-up">
                 <span class="stat-card__num">Amazon</span>
                 <span class="stat-card__label">Dev Center, Chennai</span>
               </li>
-              <li class="stat-card">
-                <span class="stat-card__num">10</span>
+              <li class="stat-card" data-animate="fade-up">
+                <span class="stat-card__num" data-count="10">10</span>
                 <span class="stat-card__label">Member QA Team Lead</span>
               </li>
-              <li class="stat-card">
-                <span class="stat-card__num">2</span>
+              <li class="stat-card" data-animate="fade-up">
+                <span class="stat-card__num" data-count="2">2</span>
                 <span class="stat-card__label">AI Tools Shipped</span>
               </li>
             </ul>
           </div>
 
-          <div class="about__col about__col--terminal">
+          <div class="about__col about__col--terminal" data-animate="slide-left">
             <div class="terminal glass-card" role="img" aria-label="Terminal showing whoami, role, and location">
               <div class="terminal__titlebar">
                 <span class="terminal__dot terminal__dot--red"></span>
@@ -186,12 +202,12 @@
 
     <section id="skills" class="section">
       <div class="section__inner">
-        <p class="section-label"><span class="section-label__hash">#</span> skills.json</p>
-        <h2 class="section-title"><span class="section-title__num">02.</span> Skills</h2>
+        <p class="section-label" data-animate="fade-in"><span class="section-label__hash">#</span> skills.json</p>
+        <h2 class="section-title" data-animate="fade-up"><span class="section-title__num">02.</span> Skills</h2>
 
-        <div class="skills__grid">
+        <div class="skills__grid" data-stagger>
 
-          <article class="skills-card glass-card">
+          <article class="skills-card glass-card" data-animate="fade-up">
             <h3 class="skills-card__title">
               <i data-lucide="layers"></i>
               <span>Tech Stack</span>
@@ -256,7 +272,7 @@
             </ul>
           </article>
 
-          <article class="skills-card glass-card">
+          <article class="skills-card glass-card" data-animate="fade-up">
             <h3 class="skills-card__title">
               <i data-lucide="activity"></i>
               <span>Proficiency</span>
@@ -311,65 +327,233 @@
       </div>
     </section>
 
-    <!-- TODO: D2-T1 — Experience timeline -->
     <section id="experience" class="section">
       <div class="section__inner">
-        <h2 class="section__title"><span class="section__num">03.</span> Experience</h2>
-        <ol class="timeline">
-          <!-- timeline entries populated in D2-T1 -->
+        <p class="section-label" data-animate="fade-in"><span class="section-label__hash">#</span> experience.log</p>
+        <h2 class="section-title" data-animate="fade-up"><span class="section-title__num">03.</span> Experience</h2>
+
+        <ol class="timeline" data-stagger>
+          <li class="timeline__item" data-animate="fade-up">
+            <span class="timeline__dot" aria-hidden="true"></span>
+            <article class="timeline__card glass-card">
+              <header class="timeline__header">
+                <h3 class="timeline__role">QA Engineer / SDET</h3>
+                <p class="timeline__company">
+                  <span class="timeline__company-name">Amazon Development Center</span>
+                  <span class="timeline__location">
+                    <i data-lucide="map-pin"></i>
+                    <span>Chennai, India</span>
+                  </span>
+                </p>
+                <p class="timeline__dates">
+                  <i data-lucide="calendar"></i>
+                  <span>Aug 2020 &mdash; Present</span>
+                </p>
+              </header>
+
+              <ul class="timeline__bullets">
+                <li>Led <strong>10-member QA team</strong> across high-scale service validation</li>
+                <li>Built AI-powered test report analyzer (NLP defect pattern detection) &mdash; <span class="award-badge">Ace of Innovation award</span></li>
+                <li>Developed AI-assisted image validation system &mdash; <span class="award-badge">Quarterback Champion award</span></li>
+                <li>Architected self-healing Playwright framework with <strong>Claude API</strong> integration</li>
+                <li>Drove automation coverage for Echo device testing at <strong>100-device fleet scale</strong></li>
+              </ul>
+            </article>
+          </li>
         </ol>
       </div>
     </section>
 
-    <!-- TODO: D2-T2 — Glassmorphism project cards -->
     <section id="projects" class="section">
       <div class="section__inner">
-        <h2 class="section__title"><span class="section__num">04.</span> Projects</h2>
-        <div class="projects__grid">
-          <!-- project cards populated in D2-T2 -->
+        <p class="section-label" data-animate="fade-in"><span class="section-label__hash">#</span> projects/</p>
+        <h2 class="section-title" data-animate="fade-up"><span class="section-title__num">04.</span> Projects</h2>
+
+        <div class="projects__grid" data-stagger>
+
+          <article class="project-card glass-card" data-animate="fade-up">
+            <span class="project-card__featured"><i data-lucide="star"></i> FEATURED</span>
+            <h3 class="project-card__title">Self-Healing Test Framework</h3>
+            <p class="project-card__desc">
+              Auto-repairs broken Playwright selectors at runtime by querying Claude API for
+              AI-driven fallback resolution &mdash; tests stay green when the DOM drifts.
+            </p>
+            <ul class="project-card__stack">
+              <li class="tech-tag">Python</li>
+              <li class="tech-tag">Playwright</li>
+              <li class="tech-tag">Claude API</li>
+              <li class="tech-tag">Pytest</li>
+            </ul>
+            <div class="project-card__footer">
+              <a class="project-card__link" href="https://github.com/akaAvinash" target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg>
+                <span>View on GitHub</span>
+                <i class="project-card__link-arrow" data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card glass-card" data-animate="fade-up">
+            <span class="project-card__featured"><i data-lucide="star"></i> FEATURED</span>
+            <h3 class="project-card__title">AI Test Report Analyzer</h3>
+            <p class="project-card__desc">
+              Internal Amazon tool: NLP-powered defect-pattern detection across nightly test
+              reports. <span class="project-card__award">Ace of Innovation award</span>.
+            </p>
+            <ul class="project-card__stack">
+              <li class="tech-tag">Python</li>
+              <li class="tech-tag">NLP</li>
+              <li class="tech-tag">spaCy</li>
+              <li class="tech-tag">Pandas</li>
+            </ul>
+            <div class="project-card__footer">
+              <span class="project-card__internal">
+                <i data-lucide="lock"></i>
+                <span>Internal &mdash; Amazon</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="project-card glass-card" data-animate="fade-up">
+            <h3 class="project-card__title">Career Ops Bot</h3>
+            <p class="project-card__desc">
+              Automated job-hunting agent: multi-portal scraping, role-fit scoring, and
+              Telegram digests &mdash; powered by a CrewAI agent network.
+            </p>
+            <ul class="project-card__stack">
+              <li class="tech-tag">Python</li>
+              <li class="tech-tag">CrewAI</li>
+              <li class="tech-tag">Telegram</li>
+              <li class="tech-tag">BeautifulSoup</li>
+            </ul>
+            <div class="project-card__footer">
+              <a class="project-card__link" href="https://github.com/akaAvinash" target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg>
+                <span>View on GitHub</span>
+                <i class="project-card__link-arrow" data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="project-card glass-card" data-animate="fade-up">
+            <h3 class="project-card__title">Tech Trends PDF Agent</h3>
+            <p class="project-card__desc">
+              GitHub Actions-driven agent that curates a weekly AI/tech digest, renders it to
+              PDF, and ships it via Telegram &mdash; zero ops once deployed.
+            </p>
+            <ul class="project-card__stack">
+              <li class="tech-tag">GitHub Actions</li>
+              <li class="tech-tag">Python</li>
+              <li class="tech-tag">Claude API</li>
+              <li class="tech-tag">Telegram</li>
+            </ul>
+            <div class="project-card__footer">
+              <a class="project-card__link" href="https://github.com/akaAvinash" target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg>
+                <span>View on GitHub</span>
+                <i class="project-card__link-arrow" data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
 
-    <!-- TODO: certifications badges -->
     <section id="certifications" class="section">
       <div class="section__inner">
-        <h2 class="section__title"><span class="section__num">05.</span> Certifications</h2>
-        <div class="certs__grid">
-          <!-- certification badges -->
+        <p class="section-label" data-animate="fade-in"><span class="section-label__hash">#</span> certifications.md</p>
+        <h2 class="section-title" data-animate="fade-up"><span class="section-title__num">05.</span> Certifications</h2>
+
+        <div class="certs__grid" data-stagger>
+
+          <article class="cert-card glass-card" data-animate="fade-up">
+            <span class="cert-card__icon" aria-hidden="true"><i data-lucide="cloud"></i></span>
+            <div class="cert-card__body">
+              <h3 class="cert-card__name">AWS Certified Cloud Practitioner</h3>
+              <p class="cert-card__issuer">Amazon Web Services</p>
+              <p class="cert-card__year">2023</p>
+            </div>
+          </article>
+
+          <article class="cert-card glass-card" data-animate="fade-up">
+            <span class="cert-card__icon" aria-hidden="true"><i data-lucide="badge-check"></i></span>
+            <div class="cert-card__body">
+              <h3 class="cert-card__name">ISTQB Foundation Level (CTFL)</h3>
+              <p class="cert-card__issuer">International Software Testing Qualifications Board</p>
+              <p class="cert-card__year">2021</p>
+            </div>
+          </article>
+
+          <article class="cert-card glass-card" data-animate="fade-up">
+            <span class="cert-card__icon" aria-hidden="true"><i data-lucide="send"></i></span>
+            <div class="cert-card__body">
+              <h3 class="cert-card__name">Postman API Fundamentals</h3>
+              <p class="cert-card__issuer">Postman</p>
+              <p class="cert-card__year">2023</p>
+            </div>
+          </article>
+
+          <article class="cert-card glass-card" data-animate="fade-up">
+            <span class="cert-card__icon" aria-hidden="true"><i data-lucide="theater"></i></span>
+            <div class="cert-card__body">
+              <h3 class="cert-card__name">Test Automation University &mdash; Playwright</h3>
+              <p class="cert-card__issuer">Applitools</p>
+              <p class="cert-card__year">2024</p>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
 
-    <!-- TODO: D2-T4 — Contact links -->
-    <section id="contact" class="section">
+    <section id="contact" class="section section--contact">
       <div class="section__inner">
-        <h2 class="section__title"><span class="section__num">06.</span> Contact</h2>
-        <ul class="contact__links">
-          <li>
-            <a href="mailto:hello@example.com">
-              <i data-lucide="mail"></i><span>Email</span>
+        <p class="section-label" data-animate="fade-in"><span class="section-label__hash">#</span> contact.sh</p>
+        <h2 class="section-title" data-animate="fade-up"><span class="section-title__num">06.</span> Contact</h2>
+
+        <div class="contact" data-stagger>
+          <p class="status-pill contact__pill" role="status" data-animate="fade-up">
+            <span class="status-pill__dot" aria-hidden="true"></span>
+            <span>Open to Opportunities</span>
+          </p>
+
+          <h3 class="contact__headline" data-animate="fade-up">Let&rsquo;s Build Something Reliable</h3>
+
+          <p class="contact__subtext" data-animate="fade-up">
+            Currently exploring Senior SDET / QA Automation roles across India and the UAE.
+            If you&rsquo;re hiring &mdash; or want to chat AI-powered QA &mdash; my inbox is open.
+          </p>
+
+          <div class="contact__actions" data-animate="fade-up">
+            <a class="btn btn--primary" href="mailto:avinashkumarks@gmail.com">
+              <i data-lucide="mail"></i>
+              <span>Email</span>
             </a>
-          </li>
-          <li>
-            <a href="https://github.com/akaAvinash" target="_blank" rel="noopener noreferrer">
-              <i data-lucide="github"></i><span>GitHub</span>
+            <a class="btn btn--outline" href="https://linkedin.com/in/avinashkumarks" target="_blank" rel="noopener noreferrer">
+              <svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
+              <span>LinkedIn</span>
             </a>
-          </li>
-          <li>
-            <a href="https://linkedin.com/in/avinashkumarks" target="_blank" rel="noopener noreferrer">
-              <i data-lucide="linkedin"></i><span>LinkedIn</span>
+            <a class="btn btn--outline" href="https://github.com/akaAvinash" target="_blank" rel="noopener noreferrer">
+              <svg class="icon" aria-hidden="true"><use href="#icon-github"/></svg>
+              <span>GitHub</span>
             </a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </section>
 
   </main>
 
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top" type="button">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p>&copy; <span id="footer-year">2026</span> Avinash Kumar K S — Built with HTML, CSS, JS.</p>
+      <p class="site-footer__name">Avinash Kumar K S</p>
+      <p class="site-footer__built">Built with &#9749; and Python</p>
+      <p class="site-footer__copy">&copy; 2025</p>
     </div>
   </footer>
 
@@ -383,11 +567,5 @@
   <script src="js/typewriter.js" defer></script>
   <script src="js/animations.js" defer></script>
   <script src="js/main.js" defer></script>
-
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.lucide) window.lucide.createIcons();
-    });
-  </script>
 </body>
 </html>

@@ -1,21 +1,37 @@
-// animations.js — IntersectionObserver-driven scroll reveals + skill bar fills
+// animations.js — central scroll-animation controller
 //
-// Watches:
-//   - `.fade-in`     → adds `.is-visible` (CSS transition handles the rest)
-//   - `.skill-bar`   → sets `--progress` from data-progress, counts the % up,
-//                       adds `.is-visible`
+// Powers four behaviors via a single IntersectionObserver:
 //
-// Each element is unobserved after first activation (one-shot reveal).
+//   [data-animate="fade-up" | "fade-in" | "slide-left"]
+//     Adds `.is-visible` once the element crosses the threshold.
+//     Initial hidden states + keyframes live in css/animations.css.
+//
+//   [data-stagger]
+//     Direct children get an incrementing `animation-delay` so they
+//     reveal in sequence (0ms, 100ms, 200ms, ...).
+//
+//   [data-count]
+//     Numeric count-up from 0 to the data-count value. Optional
+//     [data-count-suffix] is appended to every frame ("+", "%", etc.).
+//
+//   .skill-bar
+//     Sets `--progress` from data-progress and counts the % up.
+//
+// All triggers are one-shot — elements are unobserved after activation.
 
 (function () {
   'use strict';
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_STEP_MS = 100;
+  const IO_THRESHOLD    = 0.15;
+  const IO_ROOT_MARGIN  = '0px 0px -8% 0px';
 
-  /* ---------- Percentage counter ---------- */
-  function animateCount(el, target, duration) {
+  /* ---------- Numeric count-up ---------- */
+  function animateCount(el, target, duration, suffix) {
+    suffix = suffix || '';
     if (reduceMotion) {
-      el.textContent = target + '%';
+      el.textContent = target + suffix;
       return;
     }
     const start = performance.now();
@@ -23,7 +39,7 @@
 
     function frame(now) {
       const t = Math.min((now - start) / duration, 1);
-      el.textContent = Math.round(target * ease(t)) + '%';
+      el.textContent = Math.round(target * ease(t)) + suffix;
       if (t < 1) requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
@@ -35,20 +51,41 @@
     bar.style.setProperty('--progress', value + '%');
 
     const valueEl = bar.querySelector('.skill-bar__value');
-    if (valueEl) animateCount(valueEl, value, 1200);
+    if (valueEl) animateCount(valueEl, value, 1200, '%');
 
     bar.classList.add('is-visible');
   }
 
+  /* ---------- Numeric counter activation ---------- */
+  function activateCounter(el) {
+    const target = parseInt(el.dataset.count || '0', 10);
+    const suffix = el.dataset.countSuffix || '';
+    animateCount(el, target, 1100, suffix);
+  }
+
+  /* ---------- Stagger: pre-set animation-delay on direct children ---------- */
+  function applyStagger() {
+    document.querySelectorAll('[data-stagger]').forEach((parent) => {
+      const children = Array.from(parent.children);
+      children.forEach((child, i) => {
+        child.style.animationDelay = (i * STAGGER_STEP_MS) + 'ms';
+      });
+    });
+  }
+
   /* ---------- Init ---------- */
   function init() {
-    const fadeEls   = document.querySelectorAll('.fade-in');
-    const skillBars = document.querySelectorAll('.skill-bar');
+    applyStagger();
 
-    // No IO support OR reduced motion: activate everything immediately
+    const animateEls = document.querySelectorAll('[data-animate]');
+    const counterEls = document.querySelectorAll('[data-count]');
+    const skillBars  = document.querySelectorAll('.skill-bar');
+
+    // No IO support OR reduced motion: activate everything immediately.
     if (!('IntersectionObserver' in window) || reduceMotion) {
-      fadeEls.forEach((el) => el.classList.add('is-visible'));
-      skillBars.forEach((bar) => activateSkillBar(bar));
+      animateEls.forEach((el) => el.classList.add('is-visible'));
+      counterEls.forEach((el) => activateCounter(el));
+      skillBars.forEach((b)  => activateSkillBar(b));
       return;
     }
 
@@ -57,22 +94,23 @@
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           const el = entry.target;
+
           if (el.classList.contains('skill-bar')) {
             activateSkillBar(el);
+          } else if (el.hasAttribute('data-count')) {
+            activateCounter(el);
           } else {
             el.classList.add('is-visible');
           }
           observer.unobserve(el);
         }
       },
-      {
-        threshold: 0.2,
-        rootMargin: '0px 0px -10% 0px',
-      }
+      { threshold: IO_THRESHOLD, rootMargin: IO_ROOT_MARGIN }
     );
 
-    fadeEls.forEach((el)  => io.observe(el));
-    skillBars.forEach((b) => io.observe(b));
+    animateEls.forEach((el) => io.observe(el));
+    counterEls.forEach((el) => io.observe(el));
+    skillBars.forEach((b)  => io.observe(b));
   }
 
   if (document.readyState === 'loading') {

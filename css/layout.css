@@ -139,7 +139,11 @@
   box-shadow: 0 0 18px rgba(0, 212, 255, 0.28);
 }
 
-.hero__socials i {
+/* Target both pre-replacement <i> and post-Lucide <svg> */
+.hero__socials a > i,
+.hero__socials a > svg {
   width: 18px;
   height: 18px;
+  stroke: currentColor;
+  fill: none;
 }
